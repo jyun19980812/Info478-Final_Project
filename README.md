@@ -12,8 +12,9 @@
 - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7825252/
   - This paper explores the health and social inequities related to COVID-19 and proposes ethically just interventions. The paper uses an Equity Matrix that can help countries allocate COVID-19 vaccination resources. It also urges countries and policy makers to use similar tools to direct interventions and programs that can help reduce the health disparities
 
-- Link 3
-  - Summary
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7906643/
+  - This paper examines the challenges in the global access to COVID-19 vaccines and. Specifically, it focuses on the challenges around the production, affordability, allocation, and deployment of the vaccines. Using a traffic-light system, various COVID-19 vaccines were assessed by their production, affordability, allocation, and deployment to determine their potential in helping to achieve global vaccine immunity. The paper discusses how these four aspects are important to consider by governments and policy makers for vaccine distribution around the world.
+
 
 ## Datasets
 
