@@ -1,0 +1,37 @@
+---
+title: "Exploratory Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("analysis.R")
+```
+
+## Introduction
+- 
+
+## Plot 1 of Distribution Variables
+
+```{r}
+
+```
+
+## Plot 2 of Distribution Variables
+
+```{r}
+
+```
+
+
+## Plot 1 of Relationships between Variables
+
+```{r}
+
+```
+
+## Plot 2 of Relationships between Variables
+
+```{r}
+
+```
