@@ -5,7 +5,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source("analysis.R")
+source("deaths_vs_vaccinations.r")
 ```
 
 ## Introduction
@@ -19,8 +19,8 @@ source("analysis.R")
 
 ## Plot 2 of Distribution Variables
 
-```{r}
-
+```{r deaths_vs_vaccinations_plot, echo=FALSE, fig.height=8, fig.width=8, paged.print=FALSE}
+plot(deaths_vs_vaccinations_plot)
 ```
 
 
