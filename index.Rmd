@@ -6,6 +6,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source("deaths_vs_vaccinations.r")
+source("Average Deaths with location.R")
 ```
 
 ## Introduction
@@ -14,7 +15,7 @@ source("deaths_vs_vaccinations.r")
 ## Plot 1 of Distribution Variables
 
 ```{r}
-
+plot(plot_avg_deaths)
 ```
 
 ## Plot 2 of Distribution Variables

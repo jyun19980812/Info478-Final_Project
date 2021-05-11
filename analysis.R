@@ -16,4 +16,3 @@ world_data <- vaccination_data %>%
 
 # Pull total vaccination from each month of world data and compare it with months
 # (months vs vaccination)
-
