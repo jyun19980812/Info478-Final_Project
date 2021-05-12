@@ -4,7 +4,7 @@ library(ggplot2)
 #x= months
 #y = deaths
 
-world_data <- covid_data %>% 
+world_data <- covid_data %>%
   filter(location == 'World') %>% 
   filter(date %in% dates) %>% 
   mutate(date = substr(date, 1, 7))
