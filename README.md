@@ -2,7 +2,7 @@
 
 ## Purpose
 
-- The purpose of this project is to create the resource about COVID-19 vaccination inequity around the world
+- The purpose of this project is to create a resource about COVID-19 vaccination distribution and deaths around the world
 
 ## Other Research Done In This Area
 
@@ -32,9 +32,9 @@
 
 ## Learning Outcomes
 
-- Learn more about the effects of COVID-19 vaccinations on COVID-19 related deaths around the world.
+- Is there a correlation between total number of COVID-19 vaccinations on COVID-19 related deaths around the world?
 
-- Learn more about the trends in COVID-19 vaccine distribution around the world.
+- How has the number of COVID-19 related deaths changed throughout the pandemic?
 
 # Technical Description
 
