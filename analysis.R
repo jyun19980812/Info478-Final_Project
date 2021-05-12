@@ -50,6 +50,9 @@ avg_vaccinations_month_plot <- ggplot(avg_vaccinations_per_month) +
 raw_covid_data <- read.csv("owid-covid-data.csv")
 raw_covid_data$date = as.character(raw_covid_data$date)
 
+continents <- c("South America", "Europe", "North America", "European Union",
+                "Asia")
+
 deaths_and_vaccinations <- raw_covid_data %>%
   filter(location != "World") %>% 
   select(location, date, new_deaths, total_vaccinations) %>%
@@ -60,9 +63,6 @@ deaths_and_vaccinations <- raw_covid_data %>%
   ungroup(location) %>% 
   arrange(-new_deaths) %>% 
   slice_head(n = 10)
-
-continents <- c("South America", "Europe", "North America", "European Union",
-                "Asia")
 
 deaths_vs_vaccinations_plot <- ggplot(deaths_and_vaccinations) +
   geom_point(mapping = aes(x = total_vaccinations, y = new_deaths)) +
