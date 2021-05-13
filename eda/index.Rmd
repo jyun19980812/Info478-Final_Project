@@ -1,0 +1,44 @@
+---
+title: "Exploratory Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("analysis.R")
+```
+
+## Introduction
+Throughout the pandemic, many of us experienced pain and familiarized ourselves to new type of lifestyle due to **COVID-19**. We have finally produced vaccinations, yet there are growing concerns to these vaccines. Thorough this project, we aim to: 
+
+1. Look through the data of _Covid-19 Vaccinations_ and _COVID-19 Deaths_ to see if there is any correlation between them.
+
+2. We wish to find out about the _effectiveness of the COVID-19 vaccination_, and how it is differentiated throughout the _world_.
+
+3. We aim to visualize through _effective graphs_, for us and our users to easily compare.
+
+### Plot of Top 10 Countries with Highest Average Deaths
+This plot shows the top 10 countries that had highest average deaths due to **COVID-19**. The data of countries have been visualized through bar graphs, with different colors to easily differentiate. In this graph, we are able to find out that **United States** had the highest average deaths, by nearly **_600,000_** deaths. Moreover, it is intriguing to find out that most of the countries that had highest deaths came from either _American continent_, or in the continent of _Europe_.
+
+```{r, echo = F, message = F, include = T}
+plot(plot_avg_deaths)
+```
+
+### Plot 2 of Distribution Variables
+
+```{r, echo = F, message = F, include = T}
+plot(avg_vaccinations_month_plot)
+```
+
+
+### Plot 1 of Relationships between Variables
+
+```{r deaths_vs_vaccinations_plot, echo=FALSE, fig.height=8, fig.width=8, paged.print=FALSE}
+plot(deaths_vs_vaccinations_plot)
+```
+
+### Plot 2 of Relationships between Variables
+
+```{r, echo = F, message = F, include = T}
+plot(deaths_vs_months)
+```
