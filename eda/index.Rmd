@@ -43,6 +43,8 @@ plot(deaths_vs_vaccinations_plot)
 
 ### Plot 2 of Relationships between Variables
 
+This plot shows the relationship between months and new COVID-19 related deaths from 01/2020 to 04/2021. The new COVID-19 deaths numbers are the worldwide numbers that were reported during these months. As we can see there is a positive trend which suggests that covid deaths are generally increasing as time goes on with a few exceptions for certain months. The exceptions in the increasing trend in covid related deaths can be due to lockdowns, restrictions, and other health interventions to slow the spread of COVID-19. Even though we saw a decline after 12/2020 to 02/2021 the number of deaths are rising again. The peak number of deaths was `r months_data[16, 9]` and it was reported in 04/2021. 
+
 ```{r, echo = F, message = F, include = T}
 plot(deaths_vs_months)
 ```
