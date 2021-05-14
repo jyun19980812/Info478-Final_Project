@@ -1,5 +1,6 @@
 # Load packages and data
 library(tidyverse)
+library(ggplot2)
 
 covid_data <- read.csv("./data/owid-covid-data.csv")
 covid_data$date = as.character(covid_data$date)
