@@ -39,7 +39,7 @@ avg_vaccinations_per_month <- world_data %>%
   summarise(avg_vaccinations = mean(daily_vaccinations))
 
 avg_vaccinations_month_plot <- ggplot(avg_vaccinations_per_month) +
-  geom_col(mapping = aes(x = year_month, y = avg_vaccinations)) +
+  geom_col(mapping = aes(x = year_month, y = avg_vaccinations), fill = "red") +
   labs(
     title = "Average Number of Vaccinations Per Month",
     x = "Year-Month",

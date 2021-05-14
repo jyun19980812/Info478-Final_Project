@@ -26,6 +26,8 @@ plot(plot_avg_deaths)
 
 ### Plot 2 of Distribution Variables
 
+This plot shows the average number of vaccinations per month in the world. We can see that there is a positive trend, where the average number of vaccinations is increasing over time. In December 2020, the average number of vaccinations was **_165381.6_**, but it has increased to **_19646193.2_** vaccinations in May 2021. However, something that should be considered is that this trend may not be reflected when looking at different countries individually around the world. While this plot shows the overall average vaccination numbers for the world, different countries may show different numbers regarding the average number of vaccinations.
+
 ```{r, echo = F, message = F, include = T}
 plot(avg_vaccinations_month_plot)
 ```
