@@ -1,7 +1,8 @@
 # Load packages and data
 library(tidyverse)
 
-covid_data <- read.csv("owid-covid-data.csv")
+covid_data <- read.csv("../data/owid-covid-data.csv")
+covid_data$date = as.character(covid_data$date)
 
 vaccination_data <- read.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
 vaccination_data[is.na(vaccination_data)] <- 0
@@ -54,7 +55,7 @@ raw_covid_data$date <- as.character(raw_covid_data$date)
 
 continents <- c(
   "South America", "Europe", "North America", "European Union",
-  "Asia"
+  "Asia", "Africa"
 )
 
 deaths_and_vaccinations <- raw_covid_data %>%
@@ -71,9 +72,9 @@ deaths_and_vaccinations <- raw_covid_data %>%
 deaths_vs_vaccinations_plot <- ggplot(deaths_and_vaccinations) +
   geom_point(mapping = aes(x = total_vaccinations, y = new_deaths)) +
   labs(
-    title = "Top 10 Total Deaths vs. Total Vaccinations",
+    title = "Top 10 New Deaths vs. Total Vaccinations",
     x = "Total Vaccinations",
-    y = "Total Deaths"
+    y = "New Deaths"
   ) +
   geom_text(aes(x = total_vaccinations, y = new_deaths, label = location), hjust = 0, vjust = 0)
 

@@ -5,7 +5,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source("analysis.R")
+source("../analysis.R")
 ```
 
 ## Introduction
@@ -32,6 +32,8 @@ plot(avg_vaccinations_month_plot)
 
 
 ### Plot 1 of Relationships between Variables
+
+This plot shows the _top 10 countries_ that had most new deaths in **May 2021** due to **COVID-19** and compares it to the total number of vaccinations for each respective country. The relationship between the two variables is visualized through a scatter plot, where each point represents a country. In this plot, we can see that **India** had the most new deaths, by nearly **_2,500_** deaths even though they have had the second highest number of vaccinations. Additionally, it is also interesting to see that _4_ of the _10_ countries with the most new deaths are in _South America_. Just looking at this graph there doesn't seem to be an immediate correlation between the total number and vaccinations and new deaths, however this could be due to the fact that these countries have vastly different population sizes and population densities. Going forward a correlation may be easier to see if the same visualization was created, but with countries of similar populations sizes and densities.
 
 ```{r deaths_vs_vaccinations_plot, echo=FALSE, fig.height=8, fig.width=8, paged.print=FALSE}
 plot(deaths_vs_vaccinations_plot)
