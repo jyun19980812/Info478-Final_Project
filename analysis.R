@@ -1,7 +1,7 @@
 # Load packages and data
 library(tidyverse)
 
-covid_data <- read.csv("../data/owid-covid-data.csv")
+covid_data <- read.csv("./data/owid-covid-data.csv")
 covid_data$date = as.character(covid_data$date)
 
 vaccination_data <- read.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
@@ -91,10 +91,11 @@ months_data <- covid_data %>%
   filter(date %in% dates) %>%
   mutate(date = substr(date, 1, 7))
 
-deaths_vs_months <- ggplot(months_data) +
-  geom_bar(mapping = aes(x = date, y = total_deaths), stat = "identity", fill = "green") +
+deaths_vs_months <-  ggplot(months_data) +
+  geom_bar(mapping = aes(x = date, y = new_deaths), stat = 'identity', fill = "light green") +
   labs(
     title = "Covid Deaths from 01/20 to 04/21",
     x = "Months",
-    y = "Total Deaths"
+    y = "New Deaths"
   )
+
