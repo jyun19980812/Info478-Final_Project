@@ -2,7 +2,7 @@
 library(tidyverse)
 library(ggplot2)
 
-covid_data <- read.csv("./data/owid-covid-data.csv")
+covid_data <- read.csv("../data/owid-covid-data.csv")
 covid_data$date = as.character(covid_data$date)
 
 vaccination_data <- read.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
@@ -98,5 +98,5 @@ deaths_vs_months <-  ggplot(months_data) +
     title = "Covid Deaths from 01/20 to 04/21",
     x = "Months",
     y = "New Deaths"
-  )
-
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
