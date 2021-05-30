@@ -1,7 +1,9 @@
 # Load packages and data
 library(tidyverse)
+library(ggplot2)
 
-covid_data <- read.csv("owid-covid-data.csv")
+covid_data <- read.csv("../data/owid-covid-data.csv")
+covid_data$date = as.character(covid_data$date)
 
 vaccination_data <- read.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
 vaccination_data[is.na(vaccination_data)] <- 0
@@ -38,7 +40,7 @@ avg_vaccinations_per_month <- world_data %>%
   summarise(avg_vaccinations = mean(daily_vaccinations))
 
 avg_vaccinations_month_plot <- ggplot(avg_vaccinations_per_month) +
-  geom_col(mapping = aes(x = year_month, y = avg_vaccinations)) +
+  geom_col(mapping = aes(x = year_month, y = avg_vaccinations), fill = "red") +
   labs(
     title = "Average Number of Vaccinations Per Month",
     x = "Year-Month",
@@ -54,7 +56,7 @@ raw_covid_data$date <- as.character(raw_covid_data$date)
 
 continents <- c(
   "South America", "Europe", "North America", "European Union",
-  "Asia"
+  "Asia", "Africa"
 )
 
 deaths_and_vaccinations <- raw_covid_data %>%
@@ -71,9 +73,9 @@ deaths_and_vaccinations <- raw_covid_data %>%
 deaths_vs_vaccinations_plot <- ggplot(deaths_and_vaccinations) +
   geom_point(mapping = aes(x = total_vaccinations, y = new_deaths)) +
   labs(
-    title = "Top 10 Total Deaths vs. Total Vaccinations",
+    title = "Top 10 New Deaths vs. Total Vaccinations",
     x = "Total Vaccinations",
-    y = "Total Deaths"
+    y = "New Deaths"
   ) +
   geom_text(aes(x = total_vaccinations, y = new_deaths, label = location), hjust = 0, vjust = 0)
 
@@ -90,10 +92,11 @@ months_data <- covid_data %>%
   filter(date %in% dates) %>%
   mutate(date = substr(date, 1, 7))
 
-deaths_vs_months <- ggplot(months_data) +
-  geom_bar(mapping = aes(x = date, y = total_deaths), stat = "identity", fill = "green") +
+deaths_vs_months <-  ggplot(months_data) +
+  geom_bar(mapping = aes(x = date, y = new_deaths), stat = 'identity', fill = "light green") +
   labs(
     title = "Covid Deaths from 01/20 to 04/21",
     x = "Months",
-    y = "Total Deaths"
-  )
+    y = "New Deaths"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
