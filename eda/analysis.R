@@ -87,13 +87,19 @@ dates <- c(
   "2021-01-31", "2021-02-28", "2021-03-31", "2021-04-30"
 )
 
-months_data <- covid_data %>%
-  filter(location == "World") %>%
-  filter(date %in% dates) %>%
-  mutate(date = substr(date, 1, 7))
+all_con <-  c("Africa", 'Asia', 'Europe', 'North America', 'Oceania', 'South America')
 
-deaths_vs_months <-  ggplot(months_data) +
-  geom_bar(mapping = aes(x = date, y = new_deaths), stat = 'identity', fill = "light green") +
+
+continents <- covid_data %>% 
+  filter(date %in% dates) %>%
+  mutate(date = substr(date, 1, 7)) %>% 
+  select(c("iso_code", "continent", "location", "date", "new_deaths"))
+continents_edited <- continents[continents$continent != "", ] %>% 
+  group_by(continent) %>% 
+  filter(continent %in% all_con) 
+
+deaths_vs_months <- ggplot(continents_edited, aes(fill=continent, y=new_deaths, x=date)) + 
+  geom_bar(position="stack", stat="identity") +
   labs(
     title = "Covid Deaths from 01/20 to 04/21",
     x = "Months",
