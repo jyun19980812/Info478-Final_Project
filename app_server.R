@@ -53,6 +53,33 @@ server <- function(input, output) {
         ) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
     }
-  })    
+  })
+  
+  # Calculate average vaccinations per month and visualize through bar graphs
+  output$avg_vaccinations <- renderPlot({
+    avg_vaccinations_per_month <- vaccination_data %>%
+    filter(location == input$income_group) %>%
+    select(location, date, daily_vaccinations) %>%
+      mutate(date = as.character(date)) %>%
+      mutate(year_month = substring(date, 0, 7)) %>%
+      group_by(year_month) %>%
+      summarise(avg_vaccinations = mean(daily_vaccinations))
+    
+    avg_vaccinations_month_plot <- ggplot(avg_vaccinations_per_month, 
+                                          aes(x = year_month, 
+                                              y = avg_vaccinations, 
+                                              label = avg_vaccinations, 
+                                              fill = "red")
+    ) +
+      geom_col() +
+      geom_text(vjust=-0.25) +
+      labs(
+        title = "Average Number of Vaccinations Per Month",
+        x = "Year-Month",
+        y = "Average Number of Vaccinations"
+      )
+    
+    avg_vaccinations_month_plot
+  })
 }
 
