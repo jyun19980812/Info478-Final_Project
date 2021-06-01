@@ -7,6 +7,24 @@ vaccination_data[is.na(vaccination_data)] <- 0
 world_data <- vaccination_data %>%
   filter(location == "World")
 
+# Creating Country shapefile.
+shapefile <- map_data("world") %>%
+  rename(location = region)
+
+# Modify the shapefile location of USA into United States
+shapefile$location[shapefile$location == "USA"] <- "United States"
+
+# Look through the COVID-19 data to calculate the average rate of death in 
+# each country.
+avg_deaths <- covid_data %>% 
+  filter(!grepl("OWID", iso_code)) %>%
+  group_by(location) %>%
+  filter(date == max(date, na.rm = T)) %>% 
+  summarize (distb_of_deaths = mean(total_deaths, na.rm = T)) %>%
+  mutate(avg_rate_deaths = distb_of_deaths / sum(distb_of_deaths, na.rm = T))
+
+# Setting na values to zero
+avg_deaths[is.na(avg_deaths)] <- 0
 
 # Define a server function for a Shiny app
 server <- function(input, output) {
@@ -78,7 +96,7 @@ server <- function(input, output) {
     avg_vaccinations_month_plot <- ggplot(avg_vaccinations_per_month, 
                                           aes(x = year_month, 
                                               y = avg_vaccinations, 
-                                              label = avg_vaccinations, 
+                                              label = round(avg_vaccinations, 3), 
                                               fill = "red")
     ) +
       geom_col() +
@@ -92,6 +110,7 @@ server <- function(input, output) {
     avg_vaccinations_month_plot
   })
   
+<<<<<<< HEAD
   # Vaccinations vs Deaths
   output$vacc_death_plot <- renderPlot({
     raw_covid_data <- covid_data
@@ -127,5 +146,40 @@ server <- function(input, output) {
     deaths_vs_vaccinations_plot
   })
   
+=======
+  # Creating map of average death caused by COVID-19
+  output$map <- renderPlot({
+    # Selecting country to see the country of interest
+    country_input <- input$world_name
+    
+    # Filtering country to country of interest, and modify to merge with world's
+    # shapefile.
+    avg_rate <- avg_deaths %>%
+      filter(location == country_input) %>%
+      select(location, avg_rate_deaths) 
+    
+    avg_rate_interest <- shapefile %>%   
+      left_join(avg_rate, by = "location")
+    
+    # Creating a map that shows the average death rate of COVID-19 varied by 
+    # each countries
+    avg_death_map <- ggplot(data = avg_rate_interest) +
+      geom_polygon(
+        mapping = aes(x = long, y = lat, group = group, fill = avg_rate_deaths),
+        color = "gray"
+      ) +
+      labs(
+        title = paste("Average Death Rate from COVID-19 in ", country_input),
+        x = "", y = "", fill = "Average Rate of Death"
+      ) +
+      scale_fill_continuous(
+        limits = c(0, max(avg_rate_interest$avg_rate_deaths, na.rm = T)),
+        na.value = "white", low = input$color_low, high = input$color_high
+      ) +
+      coord_quickmap() +
+      theme_void()
+    return(avg_death_map)
+  })
+>>>>>>> 2a807aab7be9ca7dd77561e87a3c09946890a5d5
 }
 
