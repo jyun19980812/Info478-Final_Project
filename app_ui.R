@@ -45,8 +45,39 @@ page_three <- tabPanel(
   )
 )
 
+
+## Total Vaccines vs New Deaths
+new_covid_data <- read.csv("data/owid-covid-data.csv")
+new_covid_data <- new_covid_data %>%
+  select(total_vaccinations) %>%
+  na.omit()
+
+range <- c(min(new_covid_data$total_vaccinations),
+           max(new_covid_data$total_vaccinations))
+
+page_four <- tabPanel(
+  "Total Vaccinations vs. New Covid Deaths",
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        inputId = "vacc_range",
+        label = "Select Country Vaccine Range",
+        min = range[1],
+        max = range[2],
+        value = range
+      ),
+    ),
+    mainPanel(
+      plotOutput(
+        outputId = "vacc_death_plot"
+      )
+    )
+  )
+)
+
 ui <- navbarPage(
   "COVID-19 Vaccinations and Deaths",
   page_two,
-  page_three
+  page_three,
+  page_four
 )
