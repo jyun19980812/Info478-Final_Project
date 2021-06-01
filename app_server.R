@@ -96,7 +96,7 @@ server <- function(input, output) {
     avg_vaccinations_month_plot <- ggplot(avg_vaccinations_per_month, 
                                           aes(x = year_month, 
                                               y = avg_vaccinations, 
-                                              label = avg_vaccinations, 
+                                              label = round(avg_vaccinations, 3), 
                                               fill = "red")
     ) +
       geom_col() +
