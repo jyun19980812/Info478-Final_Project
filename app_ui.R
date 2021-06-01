@@ -1,5 +1,49 @@
 # This is app_ui.R file.
+
 # Creating UI interface.
+country_df <- covid_data %>%
+  distinct(location) %>%
+  inner_join(shapefile, by = "location") %>%
+  distinct(location)
+
+# Create Sidebar that shows dropdown menu which user can select.
+map_layout <- sidebarLayout(
+  sidebarPanel(
+    h2("Map on Average Death Rate in Country of Interest"),
+    selectInput(
+      inputId = "world_name",
+      label = "Country of Interest",
+      choices = country_df
+    ),
+    h2("Changing Color of Lower Legend"),
+    p("Lets the user choose the color of lower legend"),
+    selectInput(
+      inputId = "color_low",
+      label = "Color of Low Legend",
+      choices = c("Green", "White", "Yellow", "Brown")
+    ),
+    h2("Changing Color of Higher Legend"),
+    p("Lets the user choose the color of higher legend"),
+    selectInput(
+      inputId = "color_high",
+      label = "Color of High Legend",
+      choices = c("Black", "Blue", "Red", "Orange")
+    )
+  ),
+  mainPanel(
+    p("In this plot, we observe the average death rate of each countries caused 
+      by COVID-19, selected by user's interest. It is pertinent to find out the 
+      average rate of deaths in each of these countries, since in order to find
+      the correlation with vaccination and deaths, we must look through the data
+      of how much death is caused in each of the countries at first. Through the
+      graph, we are able to learn that", strong("United States"), " have the 
+      highest rate with ", strong("0.18 or 18%.")),
+    plotOutput(outputId = "map"),
+  )
+)
+
+# Creating Panel for Average COVID-19 Death Rate Map.
+page_one <- tabPanel("Map of Average Deaths", map_layout)
 
 page_two <- tabPanel(
   "New Covid Deaths vs Months",
@@ -47,6 +91,7 @@ page_three <- tabPanel(
 
 ui <- navbarPage(
   "COVID-19 Vaccinations and Deaths",
+  page_one,
   page_two,
   page_three
 )
