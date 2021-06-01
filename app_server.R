@@ -110,7 +110,6 @@ server <- function(input, output) {
     avg_vaccinations_month_plot
   })
   
-<<<<<<< HEAD
   # Vaccinations vs Deaths
   output$vacc_death_plot <- renderPlot({
     raw_covid_data <- covid_data
@@ -146,7 +145,6 @@ server <- function(input, output) {
     deaths_vs_vaccinations_plot
   })
   
-=======
   # Creating map of average death caused by COVID-19
   output$map <- renderPlot({
     # Selecting country to see the country of interest
@@ -180,6 +178,6 @@ server <- function(input, output) {
       theme_void()
     return(avg_death_map)
   })
->>>>>>> 2a807aab7be9ca7dd77561e87a3c09946890a5d5
+
 }
 
