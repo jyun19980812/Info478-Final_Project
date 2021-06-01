@@ -21,30 +21,40 @@ server <- function(input, output) {
     )
     
     continents <- covid_data %>% 
-      filter(date %in% dates) %>%
       mutate(date = substr(date, 1, 7)) %>% 
       select(c("iso_code", "continent", "location", "date", "new_deaths"))
     
     all_con <-  c("Africa", 'Asia', 'Europe', 'North America', 'Oceania', 'South America')
     if(input$select_con == "All") {
+      new_continents <- continents[continents$new_deaths > 0, ] %>% 
+        na.omit(continents) %>% 
+        select(c("iso_code", "continent", "date", "new_deaths"))
       
-      continents_edited <- continents[continents$continent != "", ] %>% 
+      new_continents<- new_continents[new_continents$continent != "", ] %>% 
+        group_by(date) %>% 
         group_by(continent)
       
-      ggplot(continents_edited, aes(fill=continent, y=new_deaths, x=date)) + 
+      
+     ggplot(new_continents, aes(fill=continent, y=new_deaths, x=date)) + 
         geom_bar(position="stack", stat="identity") +
         labs(
-          title = "Covid Deaths from 01/20 to 04/21",
+          title = "Covid Deaths from 01/20 to 05/21",
           x = "Months",
           y = "New Deaths"
         ) +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
+      
     } else {
-      continents_edited <- continents[continents$continent != "", ] %>% 
+      new_continents <- continents[continents$new_deaths > 0, ] %>% 
+        na.omit(continents) %>% 
+        select(c("iso_code", "continent", "date", "new_deaths"))
+      
+      new_continents<- new_continents[new_continents$continent != "", ] %>% 
+        group_by(date) %>% 
         group_by(continent) %>% 
         filter(continent %in% input$select_con)
       
-      ggplot(continents_edited, aes(fill=continent, y=new_deaths, x=date)) + 
+      ggplot(new_continents, aes(fill=continent, y=new_deaths, x=date)) + 
         geom_bar(position="stack", stat="identity") +
         labs(
           title = "Covid Deaths from 01/20 to 04/21",
