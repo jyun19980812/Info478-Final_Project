@@ -110,6 +110,41 @@ server <- function(input, output) {
     avg_vaccinations_month_plot
   })
   
+  # Vaccinations vs Deaths
+  output$vacc_death_plot <- renderPlot({
+    raw_covid_data <- covid_data
+    raw_covid_data$date <- as.character(raw_covid_data$date)
+    
+    continents <- c(
+      "South America", "Europe", "North America", "European Union",
+      "Asia", "Africa"
+    )
+    
+    deaths_and_vaccinations <- raw_covid_data %>%
+      filter(location != "World") %>%
+      select(location, date, new_deaths, total_vaccinations) %>%
+      na.omit() %>%
+      filter(!location %in% continents) %>%
+      group_by(location) %>%
+      filter(date == max(date, na.rm = TRUE)) %>%
+      filter(total_vaccinations >= input$vacc_range[1],
+             total_vaccinations <= input$vacc_range[2]) %>%
+      ungroup(location) %>%
+      arrange(-new_deaths) %>%
+      slice_head(n = 10)
+    
+    deaths_vs_vaccinations_plot <- ggplot(deaths_and_vaccinations) +
+      geom_point(mapping = aes(x = total_vaccinations, y = new_deaths)) +
+      labs(
+        title = "New Deaths vs. Total Vaccinations",
+        x = "Total Vaccinations",
+        y = "New Deaths"
+      ) +
+      geom_text(aes(x = total_vaccinations, y = new_deaths, label = location), hjust = 0, vjust = 0)
+    
+    deaths_vs_vaccinations_plot
+  })
+  
   # Creating map of average death caused by COVID-19
   output$map <- renderPlot({
     # Selecting country to see the country of interest
