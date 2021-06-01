@@ -178,5 +178,6 @@ server <- function(input, output) {
       theme_void()
     return(avg_death_map)
   })
+
 }
 
