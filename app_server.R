@@ -171,7 +171,7 @@ server <- function(input, output) {
         x = "", y = "", fill = "Average Rate of Death"
       ) +
       scale_fill_continuous(
-        limits = c(0, max(avg_rate_interest$avg_rate_deaths, na.rm = T)),
+        limits = c(0, max(avg_deaths$avg_rate_deaths, na.rm = T)),
         na.value = "white", low = input$color_low, high = input$color_high
       ) +
       coord_quickmap() +
