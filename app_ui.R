@@ -118,7 +118,30 @@ page_three <- tabPanel(
     mainPanel(
       plotOutput(
         outputId = "avg_vaccinations"
-      )
+      ),
+
+      p(""),
+      p("This plot shows the average number of vaccinations per month. 
+        Inittially, the chart just showed the average vaccinations for the
+        world, but we decided to explore what this would look like when we split
+        it up into different income groups. The different income groups in the
+        data set were low income, lower middle income, upper middle income, and
+        high income."),
+      p("We can see that there is a positive trend, where the a
+        verage number of vaccinations is increasing over time. This applies to
+        all income groups. When we look at the low income and lower middle 
+        income groups, we can see that the data about average vaccinations
+        starts in January or February, but for the upper middle income and high
+        income groups, the data starts in December 2020. We also noticed that
+        each groups shows that the average vaccination numbers increase more
+        than the previous month except for the lower middle income group, where
+        April 2021 has a higher average of vaccinations than May 2021."),
+      p(""),
+      p("Something that should be considered is that this trend may not be
+        reflected when looking at different countries individually around the
+        world. While this plot shows the overall average vaccination numbers for
+        the world, different countries may show different numbers and trends
+        regarding the average number of vaccinations.")
     )
   )
 )
