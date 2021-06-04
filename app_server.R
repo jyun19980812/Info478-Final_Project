@@ -1,5 +1,6 @@
 # This is app_server.R file
 covid_data <- read.csv("./data/owid-covid-data.csv")
+covid_data$date <- as.character(covid_data$date)
 
 vaccination_data <- read.csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
 vaccination_data[is.na(vaccination_data)] <- 0

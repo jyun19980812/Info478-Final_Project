@@ -17,13 +17,13 @@ introduction_layout <- sidebarLayout(
   mainPanel(
     h2("Introduction To the Disease Modeling"),
     p("Throughout the pandemic, many of us experienced pain and familiarized 
-    ourselves to new type of lifestyle due to ", strong("COVID-19"), "We have  
-    finally produced vaccinations, yet there are growing concerns to these 
-    vaccines. Thorough this project, we aim to: "), 
+    ourselves to a new type of lifestyle due to ", strong("COVID-19"), ". We have  
+    finally produced vaccinations, yet there are growing concerns about these 
+    vaccines. Through this project, we aim to: "), 
     p("1. Look through the data of ", em("Covid-19 Vaccinations"), " and ", 
-      em("COVID-19 Deaths"), " to see if there is any correlation between them."),
-    p("2. We wish to find out about the ", em("effectiveness of the COVID-19 
-      vaccination"), " and how it is differentiated throughout the ", 
+      em("COVID-19 Deaths"), " to see if there are any correlations between them."),
+    p("2. We hope to find out more about the ", em("effectiveness of the COVID-19 
+      vaccinations"), " and how it is distributed throughout the ", 
       em("world.")),
     p("3. We aim to visualize through ", em("effective graphs"), ", for us and 
       our users to easily compare.")
@@ -84,20 +84,35 @@ page_two <- tabPanel(
   sidebarLayout(
     sidebarPanel(
       selectInput("select_con", "Select Continent", c("All" = "All",
-                                                         "Africa" = "Africa",
-                                                         "Asia" = "Asia",
-                                                         "Europe" = "Europe",
-                                                         "North America" = "North America",
-                                                         "Oceania" = "Oceania",
-                                                         "South America" = "South America"))
+                                                      "Africa" = "Africa",
+                                                      "Asia" = "Asia",
+                                                      "Europe" = "Europe",
+                                                      "North America" = "North America",
+                                                      "Oceania" = "Oceania",
+                                                      "South America" = "South America"))
     ),
     mainPanel(
-      plotOutput(
-        outputId = "deaths_months_plot"
-      )
-    ) 
-  ) 
+      plotOutput(outputId = "deaths_months_plot"),
+      p(strong("Analysis: ")),
+      br(),
+      p("The World data (¡°All¡±) shows a positive trend which suggests that covid deaths are generally 
+     increasing as time goes on with a few exceptions for certain months. The exceptions in the 
+     increasing trend in covid related deaths can be due to lockdowns, restrictions, and other health 
+     interventions intended to slow the spread of COVID-19. Even though we saw a decline after 
+     January 2021 to March 2021 the number of deaths are rising again. The peak number of deaths 
+     was reported in April 2021. There is not enough data for May 2021 to
+     make any conclusions."),
+      p("When we look at the different continents"),
+      tags$li("Africa: There was a peak in January 2021 and the new deaths number have been declining since."),
+      tags$li("Asia: Shows a general bell curve with the exception of March 2021 in which new deaths had a sharp increase."),
+      tags$li("Europe: New deaths declined from April 2020 and was on the rise from September 2020 to January 2021. Numbers have been steady since then."),
+      tags$li("North America: We see a general increase till January 2021 and then the number has been steadily decreasing since then."),
+      tags$li("Oceania: Has had the lowest number of deaths in general and had their peak in August 2020."),
+      tags$li("South America: Had a peak in July- August of 2020 although numbers are on the rise again."),
+      p("Overall Europe, North America and South America have experienced the highest peaks of new deaths each month excluding the incomplete data from May 2021")
+    ) )
 )
+
 
 page_three <- tabPanel(
   "Average Vaccinations Per Month",
@@ -137,6 +152,7 @@ page_three <- tabPanel(
         than the previous month except for the lower middle income group, where
         April 2021 has a higher average of vaccinations than May 2021."),
       p(""),
+      br(),s
       p("Something that should be considered is that this trend may not be
         reflected when looking at different countries individually around the
         world. While this plot shows the overall average vaccination numbers for
@@ -175,6 +191,17 @@ page_four <- tabPanel(
   )
 )
 
+conclusion_panel <- tabpanel(
+  "Conclusion of the Project",
+  mainPanel(
+    h2("Conclusion"),
+    p(""),
+    h2("Limitation"),
+    p("Some of the limitations of this project are that the data we used is 
+    continuously being updated, and it is self-reported. Our findings and 
+    visualizations in this project can change.")
+  )
+)
 ui <- navbarPage(
   "COVID-19 Vaccinations and Deaths",
   introduction_panel,
