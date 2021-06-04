@@ -152,7 +152,7 @@ page_three <- tabPanel(
         than the previous month except for the lower middle income group, where
         April 2021 has a higher average of vaccinations than May 2021."),
       p(""),
-      br(),s
+      br(),
       p("Something that should be considered is that this trend may not be
         reflected when looking at different countries individually around the
         world. While this plot shows the overall average vaccination numbers for
@@ -191,22 +191,47 @@ page_four <- tabPanel(
   )
 )
 
-conclusion_panel <- tabpanel(
+conclusion_panel <- tabPanel(
   "Conclusion of the Project",
-  mainPanel(
     h2("Conclusion"),
-    p(""),
+    p("Looking through the ", em("map of average death"), " we were able to 
+      observe that the proportion of average death caused from COVID-19 was 
+      was higher from the countries of North America, Asia, and Europe. The plot
+      enables us to discover how certain countries had striking death rate 
+      compared to other countries, and indicates the need for the vaccinations 
+      to decrease the death rate was imminent."),
+    p("Using the ¡°New Covid Deaths vs Months¡± graph we found that new deaths 
+    were increasing worldwide and while some continents have decreasing numbers 
+    Covid deaths is still a pertinent issue. We hope this data can highlight the
+    importance of this issue and the need for COVID-19 vaccinations in order to 
+    protect vulnerable populations and decrease Covid related deaths."),
+    p("Our results from the ¡°Average Vaccinations Per Month¡± visualization 
+      showed that the average number of vaccinations that higher income 
+      countries receive is a lot higher than lower income countries. Higher 
+      income countries also received the vaccines earlier than lower income 
+      countries. This indicates that there is need for better vaccine 
+      distribution."),
+    p("Looking at the ", strong("NAME TBD"), " we can't see any obvious trends 
+    between the proportion of people fully vaccinated in a country and the 
+    proportion of new deaths in that country. This is likely due to the fact 
+    that none of these countries have reached herd immunity yet, which is when 
+    such a large proportion of a community becomes immune to a disease making, 
+    the spread of the disease from person to person very unlikely. However, 
+    since most countries will still take quite a while to reach herd immunity 
+    vaccines are currently mostly effective for the individual who has gotten 
+    the vaccine."),
     h2("Limitation"),
     p("Some of the limitations of this project are that the data we used is 
     continuously being updated, and it is self-reported. Our findings and 
     visualizations in this project can change.")
-  )
 )
+
 ui <- navbarPage(
   "COVID-19 Vaccinations and Deaths",
   introduction_panel,
   page_one,
   page_two,
   page_three,
-  page_four
+  page_four,
+  conclusion_panel
 )
