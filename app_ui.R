@@ -163,30 +163,38 @@ page_three <- tabPanel(
 )
 
 ## Total Vaccines vs New Deaths
-new_covid_data <- read.csv("data/owid-covid-data.csv")
-new_covid_data <- new_covid_data %>%
-  select(total_vaccinations) %>%
-  na.omit()
-
-range <- c(min(new_covid_data$total_vaccinations),
-           max(new_covid_data$total_vaccinations))
+range <- c(0, 100)
 
 page_four <- tabPanel(
-  "Total Vaccinations vs. New Covid Deaths",
+  "Proportion Vaccinated vs. Proportion of New Covid Deaths",
   sidebarLayout(
     sidebarPanel(
       sliderInput(
         inputId = "vacc_range",
-        label = "Select Country Vaccine Range",
-        min = range[1],
-        max = range[2],
-        value = range
+        label = "Select % of Population Vaccinated",
+        min = 0,
+        max = 100,
+        value = c(0, 100)
       ),
     ),
     mainPanel(
       plotOutput(
         outputId = "vacc_death_plot"
-      )
+      ),
+      br(),
+      p("This plot shows the proportion (as a percentage) of
+        people in country who are fully vaccinated in
+        comparison to the proprotion of deaths (as a percentage) for that
+        respective country. You can also filter it to only show countries
+        where their proportion of fully vaccinated people are in a specific
+        range you specify."),
+      p("Just looking at the plot there doesn't seem to be any trend between
+        the proportion of peopel fully vaccinated and the proportion of new
+        deaths in the country. However, we can see that the majority of 
+        countries have between 0% to 20% of their population fully vaccinated. We can
+        also see that Israel is the country with the highest proportion of their
+        population being fully vaccinated at about", em("58.463%"), ". Urugay
+        is the country with the highest proportion of deaths at about ", em("0.0023%"), ".")
     )
   )
 )
@@ -211,7 +219,8 @@ conclusion_panel <- tabPanel(
       income countries also received the vaccines earlier than lower income 
       countries. This indicates that there is need for better vaccine 
       distribution."),
-    p("Looking at the ", strong("NAME TBD"), " we can't see any obvious trends 
+    p("Looking at the ", strong("Proportion Vaccinated vs. Proportion of New Covid Deaths"),
+    " plot we can't see any obvious trends 
     between the proportion of people fully vaccinated in a country and the 
     proportion of new deaths in that country. This is likely due to the fact 
     that none of these countries have reached herd immunity yet, which is when 
@@ -219,7 +228,10 @@ conclusion_panel <- tabPanel(
     the spread of the disease from person to person very unlikely. However, 
     since most countries will still take quite a while to reach herd immunity 
     vaccines are currently mostly effective for the individual who has gotten 
-    the vaccine."),
+    the vaccine. The only exception seems to be Israel which seems to be
+    the country closest to reaching herd immunity, if not having already reached it,
+    with ", em("58.463%")," of their population being fully vaccinated and ",
+    em("0%"), "of their population having any new deaths."),
     h2("Limitation"),
     p("Some of the limitations of this project are that the data we used is 
     continuously being updated, and it is self-reported. Our findings and 

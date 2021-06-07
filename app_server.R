@@ -120,25 +120,27 @@ server <- function(input, output) {
     
     deaths_and_vaccinations <- raw_covid_data %>%
       filter(location != "World") %>%
-      select(location, date, new_deaths, total_vaccinations) %>%
+      select(continent, location, date, new_cases, new_deaths, people_fully_vaccinated, population) %>%
       na.omit() %>%
       filter(!location %in% continents) %>%
       group_by(location) %>%
-      filter(date == max(date, na.rm = TRUE)) %>%
-      filter(total_vaccinations >= input$vacc_range[1],
-             total_vaccinations <= input$vacc_range[2]) %>%
+      filter(date == "2021-05-03") %>%
       ungroup(location) %>%
-      arrange(-new_deaths) %>%
-      slice_head(n = 10)
+      mutate(death_prop = (new_deaths / population) * 100) %>%
+      mutate(vacc_prop = (people_fully_vaccinated / population) * 100) %>%
+      mutate(case_prop = (new_cases / population) * 100) %>%
+      filter(vacc_prop >= input$vacc_range[1],
+             vacc_prop <= input$vacc_range[2]) %>%
+      arrange(-case_prop)
     
     deaths_vs_vaccinations_plot <- ggplot(deaths_and_vaccinations) +
-      geom_point(mapping = aes(x = total_vaccinations, y = new_deaths)) +
+      geom_point(mapping = aes(x = vacc_prop, y = death_prop, color = continent)) +
       labs(
-        title = "New Deaths vs. Total Vaccinations",
-        x = "Total Vaccinations",
-        y = "New Deaths"
+        title = "Proportion Vaccinated vs. Proportion of New Covid Deaths",
+        x = "Proportion of People Fully Vaccinated (in %)",
+        y = "Proportion of New Deaths (in %)"
       ) +
-      geom_text(aes(x = total_vaccinations, y = new_deaths, label = location), hjust = 0, vjust = 0)
+      geom_text(aes(x = vacc_prop, y = death_prop, label = location, color = continent), hjust = 0, vjust = 0)
     
     deaths_vs_vaccinations_plot
   })
