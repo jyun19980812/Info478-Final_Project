@@ -7,10 +7,12 @@ introduction_layout <- sidebarLayout(
     p("The purpose of this project is to create a resource about COVID-19
       vaccination distribution and deaths around the world."),
     em("Data sources"),
-    p("Data was collected Data was collected from ", 
+    p(
+      "Data was collected Data was collected from ",
       strong("Johns Hopkins University (JHU)"), " and the JHU dataset is 
       maintained by a team at its ", strong("Center for Science and Engineering 
-                                            (CSSE)")),
+                                            (CSSE)")
+    ),
     p("The data for the vaccinations were collected by the ", strong("Our World 
     in Data"), " team from official reports")
   ),
@@ -19,12 +21,16 @@ introduction_layout <- sidebarLayout(
     p("Throughout the pandemic, many of us experienced pain and familiarized 
     ourselves to a new type of lifestyle due to ", strong("COVID-19"), ". We have  
     finally produced vaccinations, yet there are growing concerns about these 
-    vaccines. Through this project, we aim to: "), 
-    p("1. Look through the data of ", em("Covid-19 Vaccinations"), " and ", 
-      em("COVID-19 Deaths"), " to see if there are any correlations between them."),
-    p("2. We hope to find out more about the ", em("effectiveness of the COVID-19 
-      vaccinations"), " and how it is distributed throughout the ", 
-      em("world.")),
+    vaccines. Through this project, we aim to: "),
+    p(
+      "1. Look through the data of ", em("Covid-19 Vaccinations"), " and ",
+      em("COVID-19 Deaths"), " to see if there are any correlations between them."
+    ),
+    p(
+      "2. We hope to find out more about the ", em("effectiveness of the COVID-19 
+      vaccinations"), " and how it is distributed throughout the ",
+      em("world.")
+    ),
     p("3. We aim to visualize through ", em("effective graphs"), ", for us and 
       our users to easily compare.")
   )
@@ -72,7 +78,7 @@ map_layout <- sidebarLayout(
       of how much death is caused in each of the countries at first. Through the
       graph, we are able to learn that", strong("United States"), " have the 
       highest rate with ", strong("0.18 or 18%.")),
-    plotOutput(outputId = "map"),
+    plotOutput(outputId = "mapping"),
   )
 )
 
@@ -83,34 +89,47 @@ page_two <- tabPanel(
   "New Covid Deaths vs Months",
   sidebarLayout(
     sidebarPanel(
-      selectInput("select_con", "Select Continent", c("All" = "All",
-                                                      "Africa" = "Africa",
-                                                      "Asia" = "Asia",
-                                                      "Europe" = "Europe",
-                                                      "North America" = "North America",
-                                                      "Oceania" = "Oceania",
-                                                      "South America" = "South America"))
+      selectInput("select_con", "Select Continent", c(
+        "All" = "All",
+        "Africa" = "Africa",
+        "Asia" = "Asia",
+        "Europe" = "Europe",
+        "North America" = "North America",
+        "Oceania" = "Oceania",
+        "South America" = "South America"
+      ))
     ),
     mainPanel(
       plotOutput(outputId = "deaths_months_plot"),
       p(strong("Analysis: ")),
       br(),
-      p("The World data (¡°All¡±) shows a positive trend which suggests that covid deaths are generally 
-     increasing as time goes on with a few exceptions for certain months. The exceptions in the 
-     increasing trend in covid related deaths can be due to lockdowns, restrictions, and other health 
-     interventions intended to slow the spread of COVID-19. Even though we saw a decline after 
-     January 2021 to March 2021 the number of deaths are rising again. The peak number of deaths 
-     was reported in April 2021. There is not enough data for May 2021 to
-     make any conclusions."),
+      p("The World data ", strong("All"), " shows a positive trend which 
+      suggests that covid deaths are generally increasing as time goes on with a
+      few exceptions for certain months. The exceptions in the increasing trend 
+      in covid related deaths can be due to lockdowns, restrictions, and other 
+      health interventions intended to slow the spread of COVID-19. Even though 
+      we saw a decline after January 2021 to March 2021 the number of deaths are
+      rising again. The peak number of deaths was reported in April 2021. 
+      There is not enough data for May 2021 to make any conclusions."),
       p("When we look at the different continents"),
-      tags$li("Africa: There was a peak in January 2021 and the new deaths number have been declining since."),
-      tags$li("Asia: Shows a general bell curve with the exception of March 2021 in which new deaths had a sharp increase."),
-      tags$li("Europe: New deaths declined from April 2020 and was on the rise from September 2020 to January 2021. Numbers have been steady since then."),
-      tags$li("North America: We see a general increase till January 2021 and then the number has been steadily decreasing since then."),
-      tags$li("Oceania: Has had the lowest number of deaths in general and had their peak in August 2020."),
-      tags$li("South America: Had a peak in July- August of 2020 although numbers are on the rise again."),
-      p("Overall Europe, North America and South America have experienced the highest peaks of new deaths each month excluding the incomplete data from May 2021")
-    ) )
+      tags$li("Africa: There was a peak in January 2021 and the new deaths 
+              number have been declining since."),
+      tags$li("Asia: Shows a general bell curve with the exception of March 2021
+              in which new deaths had a sharp increase."),
+      tags$li("Europe: New deaths declined from April 2020 and was on the rise 
+              from September 2020 to January 2021. Numbers have been steady 
+              since then."),
+      tags$li("North America: We see a general increase till January 2021 and 
+              then the number has been steadily decreasing since then."),
+      tags$li("Oceania: Has had the lowest number of deaths in general and had 
+              their peak in August 2020."),
+      tags$li("South America: Had a peak in July- August of 2020 although 
+              numbers are on the rise again."),
+      p("Overall Europe, North America and South America have experienced the 
+        highest peaks of new deaths each month excluding the incomplete data 
+        from May 2021")
+    )
+  )
 )
 
 
@@ -121,11 +140,12 @@ page_three <- tabPanel(
       inf_input <- selectInput(
         "income_group",
         label = "Select Country Income Group",
-        choices = list("World" = "World",
-                       "Low Income" = "Low income",
-                       "Lower Middle Income" = "Lower middle income",
-                       "Upper Middle Income" = "Upper middle income",
-                       "High Income" = "High income"
+        choices = list(
+          "World" = "World",
+          "Low Income" = "Low income",
+          "Lower Middle Income" = "Lower middle income",
+          "Upper Middle Income" = "Upper middle income",
+          "High Income" = "High income"
         ),
         selected = "World"
       ),
@@ -201,25 +221,27 @@ page_four <- tabPanel(
 
 conclusion_panel <- tabPanel(
   "Conclusion of the Project",
-    h2("Conclusion"),
-    p("Looking through the ", em("map of average death"), " we were able to 
+  h2("Conclusion"),
+  p("Looking through the ", em("map of average death"), " we were able to 
       observe that the proportion of average death caused from COVID-19 was 
       was higher from the countries of North America, Asia, and Europe. The plot
       enables us to discover how certain countries had striking death rate 
       compared to other countries, and indicates the need for the vaccinations 
       to decrease the death rate was imminent."),
-    p("Using the ¡°New Covid Deaths vs Months¡± graph we found that new deaths 
-    were increasing worldwide and while some continents have decreasing numbers 
-    Covid deaths is still a pertinent issue. We hope this data can highlight the
-    importance of this issue and the need for COVID-19 vaccinations in order to 
-    protect vulnerable populations and decrease Covid related deaths."),
-    p("Our results from the ¡°Average Vaccinations Per Month¡± visualization 
-      showed that the average number of vaccinations that higher income 
-      countries receive is a lot higher than lower income countries. Higher 
-      income countries also received the vaccines earlier than lower income 
-      countries. This indicates that there is need for better vaccine 
+  p("Using the ", em("New Covid Deaths vs Months graph"), " we found that 
+    new deaths were increasing worldwide and while some continents have 
+    decreasing numbers Covid deaths is still a pertinent issue. We hope this 
+    data can highlight the importance of this issue and the need for COVID-19 
+    vaccinations in order to protect vulnerable populations and decrease 
+      Covid related deaths."),
+  p("Our results from the ", em("Average Vaccinations Per Month"), " 
+    visualization showed that the average number of vaccinations that higher 
+    income countries receive is a lot higher than lower income countries. Higher 
+    income countries also received the vaccines earlier than lower income 
+    countries. This indicates that there is need for better vaccine 
       distribution."),
-    p("Looking at the ", strong("Proportion Vaccinated vs. Proportion of New Covid Deaths"),
+  p(
+    "Looking at the ", strong("Proportion Vaccinated vs. Proportion of New Covid Deaths"),
     " plot we can't see any obvious trends 
     between the proportion of people fully vaccinated in a country and the 
     proportion of new deaths in that country. This is likely due to the fact 
@@ -230,10 +252,11 @@ conclusion_panel <- tabPanel(
     vaccines are currently mostly effective for the individual who has gotten 
     the vaccine. The only exception seems to be Israel which seems to be
     the country closest to reaching herd immunity, if not having already reached it,
-    with ", em("58.463%")," of their population being fully vaccinated and ",
-    em("0%"), "of their population having any new deaths."),
-    h2("Limitation"),
-    p("Some of the limitations of this project are that the data we used is 
+    with ", em("58.463%"), " of their population being fully vaccinated and ",
+    em("0%"), "of their population having any new deaths."
+  ),
+  h2("Limitation"),
+  p("Some of the limitations of this project are that the data we used is 
     continuously being updated, and it is self-reported. Our findings and 
     visualizations in this project can change.")
 )

@@ -3,6 +3,7 @@
 # Load packages
 library(shiny)
 library(tidyverse)
+library(maps)
 
 # Source the app_server and app_ui
 source("app_server.R")

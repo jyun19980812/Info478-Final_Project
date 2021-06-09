@@ -1,0 +1,13 @@
+name: Info478-Final_Project
+title: Info478-Final_Project
+username:
+account: jyun1998
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4243291
+bundleId: 4692404
+url: https://jyun1998.shinyapps.io/Info478-Final_Project/
+when: 1623161880.72223
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: README.md|eda/analysis.R|eda/index.Rmd|eda/index.html
