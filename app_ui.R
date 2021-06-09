@@ -13,8 +13,8 @@ introduction_layout <- sidebarLayout(
       maintained by a team at its ", strong("Center for Science and Engineering 
                                             (CSSE)")
     ),
-    p("The data for the vaccinations were collected by the ", strong("Our World 
-    in Data"), " team from official reports")
+    p("The data for the vaccinations were collected by the ", strong(a("Our World 
+    in Data", href="https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations")), " team from official reports")
   ),
   mainPanel(
     h2("Introduction To the Disease Modeling"),
@@ -200,6 +200,9 @@ page_four <- tabPanel(
     mainPanel(
       plotOutput(
         outputId = "vacc_death_plot"
+      ),
+      tableOutput(
+        outputId = "countries_in_range"
       ),
       br(),
       p("This plot shows the proportion (as a percentage) of

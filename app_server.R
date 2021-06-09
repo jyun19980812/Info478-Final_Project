@@ -149,6 +149,43 @@ server <- function(input, output) {
 
     deaths_vs_vaccinations_plot
   })
+  
+  output$countries_in_range <- renderTable({
+    
+    raw_covid_data <- covid_data
+    raw_covid_data$date <- as.character(raw_covid_data$date)
+    
+    continents <- c(
+      "South America", "Europe", "North America", "European Union",
+      "Asia", "Africa"
+    )
+    
+    name <- paste0("Countries with ", input$vacc_range[1],
+                   "% - ", input$vacc_range[2],
+                   "% of their Population Fully Vaccinated")
+    
+    Countries <- raw_covid_data %>%
+      filter(location != "World") %>%
+      select(continent, location, date, new_cases, new_deaths, people_fully_vaccinated, population) %>%
+      na.omit() %>%
+      filter(!location %in% continents) %>%
+      group_by(location) %>%
+      filter(date == "2021-05-03") %>%
+      ungroup(location) %>%
+      mutate(death_prop = (new_deaths / population) * 100) %>%
+      mutate(vacc_prop = (people_fully_vaccinated / population) * 100) %>%
+      mutate(case_prop = (new_cases / population) * 100) %>%
+      filter(
+        vacc_prop >= input$vacc_range[1],
+        vacc_prop <= input$vacc_range[2]
+      ) %>%
+      arrange(-case_prop) %>%
+      select(location)
+    
+    Countries[name] <- Countries$location
+    
+    Countries <- Countries[name]
+  })
 
   # Creating map of average death caused by COVID-19
   output$mapping <- renderPlot({
